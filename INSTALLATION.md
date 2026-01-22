@@ -72,10 +72,18 @@ docker-compose logs -f
 ```
 
 ### 4. Access the Application
-- **Frontend**: http://localhost
+- **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
 - **Health Check**: http://localhost:8000/health
 - **API Documentation**: http://localhost:8000/docs
+
+### 5. Test the Complete Application
+- **Login/Register**: Visit http://localhost:3000/auth/login or http://localhost:3000/auth/register
+- **Create Work Order**: Use AI-powered form with natural language processing
+- **Manage Work Orders**: View, assign, and complete maintenance requests
+- **Asset Management**: Search, filter, and organize facility equipment
+- **PM Scheduling**: Create preventive maintenance schedules and templates
+- **User Settings**: Configure profile, preferences, and security
 
 ## Development Setup
 
