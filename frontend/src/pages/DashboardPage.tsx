@@ -5,8 +5,9 @@ import {
   Clock,
   AlertTriangle,
   CheckCircle,
-  PlusCircle
-} from 'lucide-react'
+  PlusCircle,
+  Calendar
+} from '../icons'
 import { workOrderAPI, aiAPI, pmAPI } from '@/services/api'
 import { useAuthStore } from '@/stores/authStore'
 import { Link } from 'react-router-dom'
@@ -44,7 +45,7 @@ export const DashboardPage: React.FC = () => {
     {
       name: 'High Priority',
       value: workOrders?.data?.filter(wo => wo.priority === 'high' || wo.priority === 'critical').length || 0,
-      icon: ExclamationTriangleIcon,
+      icon: AlertTriangle,
       color: 'text-red-600 bg-red-100'
     },
     {
@@ -53,7 +54,7 @@ export const DashboardPage: React.FC = () => {
         wo.status === 'completed' && 
         new Date(wo.completed_at).toDateString() === new Date().toDateString()
       ).length || 0,
-      icon: CheckCircleIcon,
+      icon: CheckCircle,
       color: 'text-green-600 bg-green-100'
     }
   ]
@@ -198,7 +199,7 @@ export const DashboardPage: React.FC = () => {
               </div>
             ) : (
               <div className="text-center py-4">
-                <CalendarIcon className="mx-auto h-12 w-12 text-gray-400" />
+                <Calendar className="mx-auto h-12 w-12 text-gray-400" />
                 <h3 className="mt-2 text-sm font-medium text-gray-900">No upcoming PM</h3>
                 <p className="mt-1 text-sm text-gray-500">
                   No preventive maintenance scheduled in the next 7 days.

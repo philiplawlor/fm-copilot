@@ -6,8 +6,11 @@ import {
   Eye,
   Pencil,
   Search,
-  Filter
-} from 'lucide-react'
+  Filter,
+  MagnifyingGlassIcon,
+  FunnelIcon,
+  ClipboardDocumentListIcon
+} from '../icons'
 import { workOrderAPI } from '@/services/api'
 import { useAuthStore } from '@/stores/authStore'
 

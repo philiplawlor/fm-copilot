@@ -151,11 +151,8 @@ export const workOrderAPI = {
 }
 
 export const aiAPI = {
-  processIntake: async (description: string, siteId: number) => {
-    const response = await api.post('/ai/intake', { 
-      description, 
-      site_id: siteId 
-    })
+  processIntake: async (params: { description: string; site_id: number }) => {
+    const response = await api.post('/ai/intake', params)
     return response.data
   },
 
@@ -206,6 +203,87 @@ export const pmAPI = {
 
   completePM: async (scheduleId: number, completionData: any) => {
     const response = await api.post(`/pm/schedules/${scheduleId}/complete`, completionData)
+    return response.data
+  },
+
+  getPMTemplates: async () => {
+    const response = await api.get('/pm/templates')
+    return response.data
+  },
+
+  createPMTemplate: async (templateData: any) => {
+    const response = await api.post('/pm/templates', templateData)
+    return response.data
+  },
+
+  schedulePM: async (scheduleData: any) => {
+    const response = await api.post('/pm/schedule', scheduleData)
+    return response.data
+  }
+}
+
+export const assetAPI = {
+  getAssets: async (params?: any) => {
+    const response = await api.get('/assets', { params })
+    return response.data
+  },
+
+  getAsset: async (id: number) => {
+    const response = await api.get(`/assets/${id}`)
+    return response.data
+  },
+
+  createAsset: async (assetData: any) => {
+    const response = await api.post('/assets', assetData)
+    return response.data
+  },
+
+  updateAsset: async (id: number, assetData: any) => {
+    const response = await api.put(`/assets/${id}`, assetData)
+    return response.data
+  },
+
+  deleteAsset: async (id: number) => {
+    const response = await api.delete(`/assets/${id}`)
+    return response.data
+  }
+}
+
+export const siteAPI = {
+  getSites: async () => {
+    const response = await api.get('/sites')
+    return response.data
+  }
+}
+
+export const userAPI = {
+  login: async (email: string, password: string) => {
+    const response = await api.post('/auth/login', { email, password })
+    return response.data
+  },
+
+  getTechnicians: async () => {
+    const response = await api.get('/users/technicians')
+    return response.data
+  },
+
+  getVendors: async () => {
+    const response = await api.get('/vendors')
+    return response.data
+  },
+
+  updateProfile: async (profileData: any) => {
+    const response = await api.put('/users/profile', profileData)
+    return response.data
+  },
+
+  updatePreferences: async (preferences: any) => {
+    const response = await api.put('/users/preferences', preferences)
+    return response.data
+  },
+
+  changePassword: async (passwordData: { current_password: string; new_password: string }) => {
+    const response = await api.post('/auth/change-password', passwordData)
     return response.data
   }
 }
