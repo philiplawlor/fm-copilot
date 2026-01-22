@@ -18,8 +18,8 @@ import {
   CheckCircle,
   AlertTriangle
 } from 'lucide-react'
-import { userAPI } from '@/services/api'
-import { useAuthStore } from '@/stores/authStore'
+import { userAPI } from '../services/api'
+import { useAuthStore } from '../stores/authStore'
 
 export const ProfilePage: React.FC = () => {
   const { user, updateUser } = useAuthStore()

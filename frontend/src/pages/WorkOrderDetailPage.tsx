@@ -18,9 +18,9 @@ import {
   Plus,
   Zap,
   Camera
-} from 'lucide-react'
-import { workOrderAPI, aiAPI, userAPI } from '@/services/api'
-import { useAuthStore } from '@/stores/authStore'
+} from '../icons'
+import { workOrderAPI, aiAPI, userAPI } from '../services/api'
+import { useAuthStore } from '../stores/authStore'
 
 export const WorkOrderDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()

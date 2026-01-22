@@ -8,8 +8,8 @@ import {
   PlusCircle,
   Calendar
 } from '../icons'
-import { workOrderAPI, aiAPI, pmAPI } from '@/services/api'
-import { useAuthStore } from '@/stores/authStore'
+import { workOrderAPI, aiAPI, pmAPI } from '../services/api'
+import { useAuthStore } from '../stores/authStore'
 import { Link } from 'react-router-dom'
 
 export const DashboardPage: React.FC = () => {

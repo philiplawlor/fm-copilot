@@ -15,9 +15,9 @@ import {
   Wrench,
   MapPin,
   User
-} from 'lucide-react'
-import { pmAPI, assetAPI, siteAPI, aiAPI } from '@/services/api'
-import { useAuthStore } from '@/stores/authStore'
+} from '../icons'
+import { pmAPI, assetAPI, siteAPI, aiAPI } from '../services/api'
+import { useAuthStore } from '../stores/authStore'
 
 export const PMPage: React.FC = () => {
   const { user } = useAuthStore()

@@ -14,9 +14,9 @@ import {
   Filter,
   Download,
   Upload
-} from 'lucide-react'
-import { assetAPI, siteAPI } from '@/services/api'
-import { useAuthStore } from '@/stores/authStore'
+} from '../icons'
+import { assetAPI, siteAPI } from '../services/api'
+import { useAuthStore } from '../stores/authStore'
 
 export const AssetsPage: React.FC = () => {
   const { user } = useAuthStore()

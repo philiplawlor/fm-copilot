@@ -11,8 +11,8 @@ import {
   FunnelIcon,
   ClipboardDocumentListIcon
 } from '../icons'
-import { workOrderAPI } from '@/services/api'
-import { useAuthStore } from '@/stores/authStore'
+import { workOrderAPI } from '../services/api'
+import { useAuthStore } from '../stores/authStore'
 
 export const WorkOrdersPage: React.FC = () => {
   const { user } = useAuthStore()

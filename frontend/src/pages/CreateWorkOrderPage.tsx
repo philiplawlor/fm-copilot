@@ -13,8 +13,8 @@ import {
   Upload,
   Camera
 } from 'lucide-react'
-import { workOrderAPI, aiAPI, assetAPI, siteAPI } from '@/services/api'
-import { useAuthStore } from '@/stores/authStore'
+import { workOrderAPI, aiAPI, assetAPI, siteAPI } from '../services/api'
+import { useAuthStore } from '../stores/authStore'
 
 export const CreateWorkOrderPage: React.FC = () => {
   const navigate = useNavigate()
