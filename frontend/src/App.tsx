@@ -7,12 +7,15 @@ import { Layout } from './components/Layout'
 import { AuthLayout } from './components/AuthLayout'
 
 // Pages
-import { LoginPage } from './pages/auth/LoginPage'
-import { RegisterPage } from './pages/auth/RegisterPage'
-import { DashboardPage } from './pages/DashboardPage'
-import { WorkOrdersPage } from './pages/WorkOrdersPage'
-import { WorkOrderDetailPage } from './pages/WorkOrderDetailPage'
-import { CreateWorkOrderPage, AssetsPage, PMPage, ProfilePage } from './pages/CreateWorkOrderPage'
+import { LoginPage } from './pages'
+import { RegisterPage } from './pages'
+import { DashboardPage } from './pages'
+import { WorkOrdersPage } from './pages'
+import { WorkOrderDetailPage } from './pages'
+import { CreateWorkOrderPage } from './pages'
+import { AssetsPage } from './pages'
+import { PMPage } from './pages'
+import { ProfilePage } from './pages'
 
 // Protected route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
