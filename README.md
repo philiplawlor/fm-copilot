@@ -45,20 +45,40 @@ git clone <repo-url> fm-copilot
 cd fm-copilot
 
 # Configure environment variables
-cp backend/.env.example backend/.env
-# Edit backend/.env with your configuration:
-# - OPENAI_API_KEY: Your OpenAI API key
-# - Database credentials
-# - Other environment settings
+cp backend/.env.example backend/.env  # Edit with your configuration
 
-# Start the application
-docker-compose up -d
+# Start the application (auto-rebuilds with code changes)
+./fm-copilot.sh start
 
-# Access the application
-Frontend: http://localhost
-API: http://localhost:8000
-Health Check: http://localhost:8000/health
+# Or use PowerShell on Windows
+.\fm-copilot.ps1 start
+
+# Verify services are running
+docker-compose ps
+
+# View logs if needed
+./fm-copilot.sh logs
 ```
+
+### Development Workflow
+
+The FM Copilot scripts automatically rebuild Docker images when starting/restarting:
+
+```bash
+# Start with rebuild (default behavior)
+./fm-copilot.sh start
+
+# Restart with rebuild  
+./fm-copilot.sh restart
+
+# Stop only (preserves data)
+./fm-copilot.sh stop
+
+# Force stop (removes containers, preserves data)
+./fm-copilot.sh force-stop
+```
+
+**Important**: When you make code changes, simply run `./fm-copilot.sh restart` to see your updates in the running environment.
 
 ### Development Setup
 
