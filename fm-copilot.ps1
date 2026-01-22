@@ -98,9 +98,9 @@ function Start-Environment {
     Write-Status "Starting all services..."
     
     if ($ComposeCmd -eq "docker-compose") {
-        docker-compose -f $ComposeFile -p $ProjectName up -d
+        docker-compose -f $ComposeFile -p $ProjectName up -d --build
     } else {
-        docker compose -f $ComposeFile -p $ProjectName up -d
+        docker compose -f $ComposeFile -p $ProjectName up -d --build
     }
     
     # Wait for services to be ready
@@ -413,9 +413,9 @@ function Show-Help {
     Write-Host "Usage: .\$($MyInvocation.MyCommand.Name).ps1 [COMMAND] [OPTIONS]"
     Write-Host ""
     Write-Host "Commands:"
-    Write-Host "  start           Start FM Copilot environment"
+    Write-Host "  start           Start FM Copilot environment (rebuilds with code changes)"
     Write-Host "  stop            Stop environment gracefully"
-    Write-Host "  restart         Restart environment"
+    Write-Host "  restart         Restart environment (rebuilds with code changes)"
     Write-Host "  force-stop      Force stop services and containers (preserves data)"
     Write-Host "  delete-all      DELETE ALL DATA AND RESOURCES (DESTRUCTIVE)"
     Write-Host "  logs [service]  Show logs for all or specific service"

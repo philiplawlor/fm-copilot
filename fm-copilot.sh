@@ -91,9 +91,9 @@ start_environment() {
         echo "VITE_API_URL=http://localhost:8000/api" > frontend/.env
     fi
     
-    # Start services
-    print_status "Starting all services..."
-    $COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME up -d
+    # Start services with rebuild for code changes
+    print_status "Building and starting all services..."
+    $COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME up -d --build
     
     # Wait for services to be healthy
     print_status "Waiting for services to be ready..."
@@ -320,9 +320,9 @@ show_help() {
     echo "Usage: $0 [COMMAND] [OPTIONS]"
     echo
 echo "Commands:"
-    echo "  start           Start FM Copilot environment"
+    echo "  start           Start FM Copilot environment (rebuilds with code changes)"
     echo "  stop            Stop environment gracefully"
-    echo "  restart         Restart environment"
+    echo "  restart         Restart environment (rebuilds with code changes)"
     echo "  force-stop      Force stop services and containers (preserves data)"
     echo "  delete-all      DELETE ALL DATA AND RESOURCES (DESTRUCTIVE)"
     echo "  logs [service]  Show logs for all or specific service"
