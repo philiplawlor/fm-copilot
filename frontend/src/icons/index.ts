@@ -52,6 +52,59 @@ import {
   ClipboardList
 } from 'lucide-react'
 
+// Export all icons
+export {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Shield,
+  Bell,
+  Moon,
+  Sun,
+  Globe,
+  Lock,
+  Eye,
+  EyeOff,
+  Save,
+  Camera,
+  CheckCircle,
+  AlertTriangle,
+  ArrowLeft,
+  Edit,
+  Clock,
+  Calendar,
+  Wrench,
+  Plus,
+  PlusCircle,
+  Search,
+  Filter,
+  Play,
+  Pause,
+  Zap,
+  Upload,
+  Download,
+  MessageSquare,
+  Paperclip,
+  X,
+  Settings,
+  Home,
+  BarChart,
+  TrendingUp,
+  Package,
+  Truck,
+  FileText,
+  Users,
+  Building,
+  ChevronRight,
+  ChevronDown,
+  RefreshCw,
+  Trash2,
+  Copy,
+  MoreVertical,
+  ClipboardList
+}
+
 // Icon aliases for compatibility
 export const MagnifyingGlassIcon = Search
 export const FunnelIcon = Filter
@@ -71,10 +124,3 @@ try {
 }
 
 export { ToolsIcon as Tools };
-
-// Icon aliases for compatibility
-export const MagnifyingGlassIcon = Search
-export const FunnelIcon = Filter
-export const ClipboardDocumentListIcon = ClipboardList
-export const ExclamationTriangleIcon = AlertTriangle
-export const CalendarIcon = Calendar
