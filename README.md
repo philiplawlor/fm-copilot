@@ -232,3 +232,30 @@ PORT=8000
 - Real-time dashboard with analytics and reporting
 - Full containerization with production-ready deployment
 - Comprehensive security and monitoring capabilities
+
+## 🌿 **Git Branch Structure**
+
+### Branch Organization
+- **`master`** - Production-ready stable code
+- **`dev`** - Development branch for new features
+- **`test`** - Integration testing and QA
+- **`prod`** - Production deployment configurations
+- **`0.1.0`** - Version-specific release branch
+
+### Branch Usage
+```bash
+# Development work
+git checkout dev
+git add .
+git commit -m "feat: new feature"
+git push origin dev
+
+# Create version branch
+git checkout -b 0.2.0 dev
+
+# Merge to master when ready
+git checkout master
+git merge dev
+git tag v0.2.0
+git push origin master --tags
+```
