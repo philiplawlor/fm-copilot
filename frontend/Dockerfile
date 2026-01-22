@@ -5,32 +5,15 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with workarounds for npm issues
-RUN npm install --no-optional || true && \
-    npm cache clean --force || true
+# Install dependencies (prefer lockfile for deterministic builds)
+ARG NPM_FLAGS="--no-audit"
+RUN if [ -f package-lock.json ]; then npm ci; else npm install ${NPM_FLAGS}; fi
 
 # Copy source code
 COPY . .
 
-# Build application using Vite with proper Node setup
-RUN apk add --no-cache nodejs npm && \
-    npm install --global vite && \
-    npm config set prefix /usr/local && \
-    npm cache clean --force
-
-# Set proper environment for Vite
-ENV NODE_ENV=production
-ENV VITE_API_URL=http://backend:8000/api
-
-# Build application
+# Build application using local dependencies
 RUN npm run build
-
-# Copy source code
-COPY . .
-
-# Build application using the working setup
-RUN npm run build || \
-    npm run build --verbose
 
 # Production stage
 FROM nginx:alpine
