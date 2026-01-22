@@ -6,8 +6,24 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies with workarounds for npm issues
-RUN npm install --no-optional || true \
-    && npm cache clean --force || true
+RUN npm install --no-optional || true && \
+    npm cache clean --force || true
+
+# Copy source code
+COPY . .
+
+# Build application using Vite with proper Node setup
+RUN apk add --no-cache nodejs npm && \
+    npm install --global vite && \
+    npm config set prefix /usr/local && \
+    npm cache clean --force
+
+# Set proper environment for Vite
+ENV NODE_ENV=production
+ENV VITE_API_URL=http://backend:8000/api
+
+# Build application
+RUN npm run build
 
 # Copy source code
 COPY . .
