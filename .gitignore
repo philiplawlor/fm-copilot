@@ -158,7 +158,6 @@ pnpm-lock.yaml
 docs/build/
 
 # Local configuration files (keep .env.example but ignore others)
-.env.example
 .env.local
 .env.*.local
 config/local.js

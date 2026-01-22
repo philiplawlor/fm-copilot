@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🔗 **Service Dependencies** - Corrected networking and service discovery
 - 🚀 **Port Configuration** - Fixed nginx port mapping and API proxy setup
 - 📦 **Package Management** - Resolved npm build and dependency issues
+- 🔒 **Security Cleanup** - Removed all secrets from git repository history
+- 📝 **Environment Files** - Updated .env.example with proper template
 
 ### Technical Details
 - **Frontend**: React 18, TypeScript, Vite, Tailwind CSS
