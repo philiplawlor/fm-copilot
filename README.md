@@ -1,0 +1,234 @@
+# FM Copilot - Facilities Management AI Assistant
+
+## Overview
+
+FM Copilot is a pragmatic AI assistant that sits on top of existing CMMS/BMS systems to reduce administrative burden, improve maintenance workflows, and help facility managers and technicians work smarter.
+
+## Architecture
+
+```
+fm-copilot/
+├── backend/          # Node.js/Python API services
+├── frontend/         # React web application  
+├── database/         # MySQL schema and migrations
+├── docs/            # Documentation and API specs
+├── scripts/         # Deployment and utility scripts
+└── docker-compose.yml # Container orchestration
+```
+
+## Phase 1 Features (MVP)
+
+1. **Intelligent Work Order Intake** - AI-powered natural language processing
+2. **Smart Tech & Vendor Dispatch** - Assignment recommendation engine
+3. **Preventive Maintenance Auto-Setup** - Template-based PM scheduling
+
+## Tech Stack
+
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express, TypeScript
+- **Database**: MySQL 8.0, Redis for caching
+- **AI**: OpenAI GPT-4 for NLP, custom classification models
+- **Deployment**: Docker Compose, Nginx reverse proxy
+
+## Quick Start
+
+### Prerequisites
+- Docker and Docker Compose
+- Node.js 18+ (for local development)
+- OpenAI API key (for AI functionality)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repo-url> fm-copilot
+cd fm-copilot
+
+# Configure environment variables
+cp backend/.env.example backend/.env
+# Edit backend/.env with your configuration:
+# - OPENAI_API_KEY: Your OpenAI API key
+# - Database credentials
+# - Other environment settings
+
+# Start the application
+docker-compose up -d
+
+# Access the application
+Frontend: http://localhost
+API: http://localhost:8000
+Health Check: http://localhost:8000/health
+```
+
+### Development Setup
+
+```bash
+# Backend development
+cd backend
+npm install
+npm run dev
+
+# Frontend development  
+cd frontend
+npm install
+npm run dev
+```
+
+## Architecture
+
+```
+fm-copilot/
+├── backend/                 # Node.js API services
+│   ├── src/
+│   │   ├── controllers/   # API route handlers
+│   │   ├── services/      # Business logic layer
+│   │   ├── middleware/     # Auth, validation, rate limiting
+│   │   ├── routes/        # API route definitions
+│   │   └── config/        # Database, Redis configuration
+│   ├── Dockerfile          # Multi-stage Docker build
+│   └── package.json        # Dependencies and scripts
+├── frontend/               # React web application
+│   ├── src/
+│   │   ├── components/    # React UI components
+│   │   ├── pages/         # Page-level components
+│   │   ├── services/      # API client and state management
+│   │   └── stores/        # Zustand state stores
+│   ├── Dockerfile          # Nginx + React build
+│   └── package.json        # Dependencies and scripts
+├── database/               # MySQL schema and migrations
+├── docs/                  # Documentation and API specs
+└── docker-compose.yml      # Container orchestration
+```
+
+## Core Features
+
+### 🤖 AI-Powered Work Order Management
+- **Natural Language Intake**: Convert plain text descriptions into structured work orders
+- **Smart Assignment**: AI recommends optimal technicians based on skills, availability, and location
+- **Priority Prediction**: Automatic priority assessment based on issue type and asset criticality
+- **Historical Learning**: System improves recommendations over time
+
+### 📋 Preventive Maintenance Automation
+- **Template Library**: Standardized PM procedures for different asset types
+- **Auto-Scheduling**: Intelligent PM scheduling based on usage patterns and manufacturer recommendations
+- **Compliance Tracking**: Ensure regulatory requirements are met
+- **Cost Optimization**: Bundle PM tasks to reduce operational costs
+
+### 📊 Real-Time Dashboard
+- **Operational Overview**: Live status of all work orders and PM tasks
+- **Performance Metrics**: Technician utilization, completion rates, response times
+- **Asset Health**: Equipment status and maintenance history
+- **Cost Analytics**: Maintenance spend analysis and budget tracking
+
+### 🔧 Integration & Extensibility
+- **CMMS Connectivity**: RESTful APIs for existing system integration
+- **Webhook Support**: Real-time data synchronization
+- **Custom Fields**: Configurable properties to match organizational needs
+- **Audit Trail**: Complete change tracking and compliance logging
+
+## Technology Stack
+
+### Frontend
+- **Framework**: React 18 with TypeScript
+- **Styling**: Tailwind CSS for responsive design
+- **State Management**: Zustand for global state
+- **Routing**: React Router v6 for navigation
+- **Build Tool**: Vite for fast development and building
+- **HTTP Client**: Axios for API communication
+
+### Backend
+- **Runtime**: Node.js 18 with TypeScript
+- **Framework**: Express.js for REST API
+- **Database**: MySQL 8.0 with connection pooling
+- **Caching**: Redis for session storage and caching
+- **Authentication**: JWT with bcrypt password hashing
+- **AI Integration**: OpenAI GPT-4 for natural language processing
+
+### DevOps
+- **Containerization**: Docker multi-stage builds
+- **Orchestration**: Docker Compose for service coordination
+- **Reverse Proxy**: Nginx for production deployment
+- **Security**: Rate limiting, CORS, security headers
+- **Monitoring**: Health checks and structured logging
+
+## API Documentation
+
+### Authentication
+```http
+POST /api/auth/register    # User registration
+POST /api/auth/login       # User login
+POST /api/auth/logout      # User logout
+POST /api/auth/refresh     # Token refresh
+```
+
+### Work Orders
+```http
+GET    /api/work-orders        # List work orders
+POST   /api/work-orders        # Create work order
+GET    /api/work-orders/:id    # Get work order details
+PUT    /api/work-orders/:id    # Update work order
+DELETE /api/work-orders/:id # Delete work order
+```
+
+### AI Processing
+```http
+POST   /api/ai/intake          # Process natural language work order
+POST   /api/ai/dispatch        # Get dispatch recommendations
+POST   /api/ai/priority        # Suggest work order priority
+POST   /api/ai/pm-template      # Suggest PM template
+```
+
+## Configuration
+
+### Environment Variables
+```bash
+# Database
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=fm_copilot
+DB_USER=fm_user
+DB_PASSWORD=fm_password
+
+# Redis
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
+# Authentication
+JWT_SECRET=your-super-secret-jwt-key
+JWT_EXPIRES_IN=24h
+
+# AI Services
+OPENAI_API_KEY=your-openai-api-key
+OPENAI_MODEL=gpt-4
+
+# Application
+NODE_ENV=production
+PORT=8000
+```
+
+## Security Features
+
+- **Authentication**: JWT-based secure authentication
+- **Authorization**: Role-based access control
+- **Rate Limiting**: API request throttling
+- **Input Validation**: Comprehensive request validation
+- **Security Headers**: XSS protection, content security policy
+- **Data Encryption**: Secure password storage and data transmission
+
+## Monitoring & Logging
+
+- **Health Checks**: `/health` endpoint for service monitoring
+- **Structured Logging**: JSON-formatted logs with correlation IDs
+- **Error Tracking**: Comprehensive error reporting and alerting
+- **Performance Metrics**: Request timing and database query monitoring
+- **Audit Logging**: Full audit trail for compliance
+
+## Version: v0.1.0 (Production Ready)
+
+### 🎉 **What's New in v0.1.0**
+- Complete FM Copilot platform with AI-powered work order management
+- Intelligent technician dispatch and routing optimization
+- Automated preventive maintenance scheduling
+- Real-time dashboard with analytics and reporting
+- Full containerization with production-ready deployment
+- Comprehensive security and monitoring capabilities

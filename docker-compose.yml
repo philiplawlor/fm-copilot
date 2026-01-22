@@ -1,0 +1,78 @@
+# version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: fm-copilot-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: fm_copilot
+      MYSQL_USER: fm_user
+      MYSQL_PASSWORD: fm_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - fm-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: fm-copilot-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - fm-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fm-copilot-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fm_copilot
+      DB_USER: fm_user
+      DB_PASSWORD: fm_password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/logs:/app/logs
+    networks:
+      - fm-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fm-copilot-frontend
+    ports:
+      - "3000:3000"
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - fm-network
+
+
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  fm-network:
+    driver: bridge
