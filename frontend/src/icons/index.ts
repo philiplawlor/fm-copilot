@@ -50,7 +50,8 @@ import {
   Trash2,
   Copy,
   MoreVertical,
-  ClipboardList
+  ClipboardList,
+  Tools
 } from 'lucide-react'
 
 // Export all icons
