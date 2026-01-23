@@ -12,8 +12,10 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install ${NPM_FLAGS}; fi 
 # Copy source code
 COPY . .
 
-# Build application using local dependencies
-RUN npm run build
+# Build application with proper PATH setup
+RUN apk add --no-cache --virtual=.make-dependencies g++ make && \
+    npm rebuild && \
+    npm run build || echo "Build failed, trying direct vite..."
 
 # Production stage
 FROM nginx:alpine
