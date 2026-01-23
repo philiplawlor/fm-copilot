@@ -100,7 +100,8 @@ start_environment() {
     sleep 10
     
     # Check service status
-    if $($COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME ps -q | grep -v "Up"); then
+    FAILED_SERVICES=$($COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME ps --format "table {{.Status}}" | grep -v "Up" | grep -v "STATUS" || true)
+    if [ -n "$FAILED_SERVICES" ]; then
         print_error "Some services failed to start. Check logs with: $0 logs"
         $COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME ps
         exit 1
@@ -226,7 +227,8 @@ show_status() {
     
     COMPOSE_CMD=$(get_compose_cmd)
     
-    if $COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME ps -q | grep -v ""; then
+    RUNNING_CONTAINERS=$($COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME ps -q)
+    if [ -n "$RUNNING_CONTAINERS" ]; then
         echo -e "${GREEN}Services are running:${NC}"
         $COMPOSE_CMD -f $COMPOSE_FILE -p $PROJECT_NAME ps
         echo

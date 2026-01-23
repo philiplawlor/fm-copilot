@@ -1,19 +1,8 @@
-FROM node:20-alpine AS builder
-
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies (simple, proven approach)
-RUN npm ci
-
-# Copy source code
-COPY . .
-
-# Production stage
+# Production stage - Use pre-built application from host
 FROM nginx:alpine
 
-# Copy pre-built application from host
-COPY --chown=1001:1001:1001 /app/dist /usr/share/nginx/html
+# Copy built application from host
+COPY dist /usr/share/nginx/html
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d
