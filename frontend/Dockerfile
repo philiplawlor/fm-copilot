@@ -13,11 +13,9 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install ${NPM_FLAGS}; fi 
 COPY . .
 
 # Build application with proper PATH setup
-# Build application with proper PATH setup (try vite first, fallback to npm run build)
-RUN apk add --no-cache --virtual=.make-dependencies g++ make && \
-    npm rebuild && \
-    npx vite build --mode production || \
-    npm run build 2>&1 | tee /tmp/build.log || echo "Build failed, see /tmp/build.log"
+# Build application with simplified approach
+RUN npm install && \
+    npm run build
 
 # Production stage
 FROM nginx:alpine
