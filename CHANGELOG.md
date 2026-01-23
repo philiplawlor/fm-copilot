@@ -33,6 +33,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🛠️ **Nginx Configuration** - Corrected server block configuration for frontend container
 - 📦 **Frontend Build Process** - Switched to pre-built dist copy approach for reliability
 - 🔍 **Container Status Checking** - Fixed service status detection in management scripts
+
+## [0.1.1] - 2026-01-23
+
+### Fixed
+- 🎯 **React Rendering Issues** - Resolved blank home page by fixing DOM mounting timing
+- 🏠 **Landing Page Implementation** - Created professional welcome page with feature highlights
+- 🔀 **Routing Structure** - Added direct `/login` and `/register` routes for better UX
+- 📱 **Navigation Experience** - Improved routing for authenticated/unauthenticated states
+- 🔧 **JavaScript Execution** - Fixed CSP header conflicts preventing script execution
+- 📋 **UI Component Loading** - Ensured all React components render correctly
+
+### Added
+- 🎨 **Professional Landing Page** - Welcome interface with FM Copilot branding
+- 🛣️ **Multiple Route Access** - Direct access to login/register without `/auth` prefix
+- 📊 **Feature Showcasing** - Highlight AI work orders, smart dispatch, and PM automation
+- 🐛 **Comprehensive Debugging** - Added console logging for React initialization
+
+### Status
+- ✅ **React App**: Fully rendering and interactive
+- ✅ **All Routes**: Working correctly with proper navigation
+- ✅ **UI Components**: Loading and functioning as expected
+- ✅ **User Experience**: Smooth and professional interface
 - 🐳 **Docker Build Issues** - Fixed multi-stage builds and environment variable handling
 - 🔗 **Service Dependencies** - Corrected networking and service discovery
 - 🚀 **Port Configuration** - Fixed nginx port mapping and API proxy setup
