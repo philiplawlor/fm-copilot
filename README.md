@@ -54,10 +54,12 @@ cp backend/.env.example backend/.env  # Edit with your configuration
 .\fm-copilot.ps1 start
 
 # Verify services are running
-docker-compose ps
+./fm-copilot.sh status
+# Or PowerShell: .\fm-copilot.ps1 status
 
 # View logs if needed
 ./fm-copilot.sh logs
+# Or specific service: ./fm-copilot.sh logs backend
 ```
 
 ### Development Workflow
@@ -93,6 +95,40 @@ cd frontend
 npm install
 npm run dev
 ```
+
+### Troubleshooting
+
+**Common Issues and Solutions:**
+
+```bash
+# If containers fail to start with build errors:
+./fm-copilot.sh force-stop    # Clean up containers
+./fm-copilot.sh start          # Fresh start
+
+# If frontend build fails:
+cd frontend
+npm run build                 # Build manually first
+cd .. && ./fm-copilot.sh start
+
+# If backend logs show database connection errors:
+./fm-copilot.sh logs backend  # Check detailed logs
+
+# If npm scripts fail during Docker build:
+npm cache clean --force        # Clear npm cache
+rm -rf node_modules package-lock.json
+npm install                   # Fresh install
+
+# Check all services status:
+./fm-copilot.sh status        # Detailed health check
+```
+
+**Script Compatibility:**
+- **Windows**: Use `.\fm-copilot.ps1` or `./fm-copilot.sh` (Git Bash/WSL)
+- **Linux/macOS**: Use `./fm-copilot.sh`
+- Both scripts have identical functionality
+
+**Port Conflicts:**  
+If port conflicts occur, edit `docker-compose.yml` to change ports 3000, 8000, 3306, or 6379.
 
 ## Architecture
 

@@ -29,10 +29,19 @@ echo "VITE_API_URL=http://localhost:8000/api" > frontend/.env
 
 3. **Start all services**
 ```bash
-docker-compose up -d
+# For Linux/macOS or Git Bash on Windows
+./fm-copilot.sh start
+
+# For PowerShell on Windows
+.\fm-copilot.ps1 start
 ```
 
-4. **Access the application**
+4. **Verify the environment**
+```bash
+./fm-copilot.sh status
+```
+
+5. **Access the application**
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000
 - API Documentation: http://localhost:8000/health
@@ -150,6 +159,71 @@ curl -X POST http://localhost:8000/api/ai/intake \
     "description": "Chiller in Building 3 making loud noise",
     "site_id": 1
   }'
+```
+
+## 📋 Script Management
+
+FM Copilot includes management scripts for Docker environments:
+
+### Available Commands
+
+**For Linux/macOS or Git Bash:**
+```bash
+./fm-copilot.sh [command]
+```
+
+**For PowerShell on Windows:**
+```powershell
+.\fm-copilot.ps1 [command]
+```
+
+### Commands Overview
+
+| Command | Description |
+|---------|-------------|
+| `start` | Start all services with rebuild |
+| `stop` | Stop services gracefully |
+| `restart` | Stop and restart all services |
+| `force-stop` | Force stop and remove containers |
+| `status` | Show service status and health |
+| `logs [service]` | Show logs (all or specific service) |
+| `backup` | Backup all data |
+| `delete-all` | ⚠️ Delete ALL data and containers |
+| `help` | Show help information |
+
+### Daily Workflow Examples
+
+```bash
+# Start your development environment
+./fm-copilot.sh start
+
+# Check if everything is running
+./fm-copilot.sh status
+
+# View backend logs if issues occur
+./fm-copilot.sh logs backend
+
+# Restart after code changes
+./fm-copilot.sh restart
+
+# Stop at end of day
+./fm-copilot.sh stop
+```
+
+### Service-Specific Commands
+
+```bash
+# View only frontend logs
+./fm-copilot.sh logs frontend
+
+# View only backend logs  
+./fm-copilot.sh logs backend
+
+# View database logs
+./fm-copilot.sh logs mysql
+
+# View Redis logs
+./fm-copilot.sh logs redis
 ```
 
 ### Production Deployment
