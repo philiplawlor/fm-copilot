@@ -21,14 +21,14 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps for production
+    target: 'es2015',
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['@headlessui/react', 'lucide-react'],
-        },
+        manualChunks: undefined,
+        inlineDynamicImports: true,
+        format: 'iife', // Use immediately invoked function expression
+        name: 'FMCopilot', // Global variable name
       },
     },
   },
