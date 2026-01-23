@@ -1,30 +1,22 @@
 FROM node:20-alpine AS builder
 
-WORKDIR /app
-
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (prefer lockfile for deterministic builds)
-ARG NPM_FLAGS="--no-audit"
-RUN if [ -f package-lock.json ]; then npm ci; else npm install ${NPM_FLAGS}; fi || echo "Install completed with warnings"
+# Install dependencies (simple, proven approach)
+RUN npm ci
 
 # Copy source code
 COPY . .
 
-# Build application with proper PATH setup
-# Build application with simplified approach
-RUN npm install && \
-    npm run build
-
 # Production stage
 FROM nginx:alpine
 
-# Copy built application
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy pre-built application from host
+COPY --chown=1001:1001:1001 /app/dist /usr/share/nginx/html
 
 # Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
@@ -46,7 +38,7 @@ EXPOSE 3000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000/ || exit 1
+   CMD curl -f http://localhost:3000/ || exit 1
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
