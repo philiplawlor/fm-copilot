@@ -1,14 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuthStore } from '../stores/authStore'
 
 export const LandingPage: React.FC = () => {
-  const { isAuthenticated } = useAuthStore()
-
-  if (isAuthenticated) {
-    return <Link to="/dashboard" />
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col justify-center items-center px-4">
       <div className="max-w-4xl w-full text-center">
