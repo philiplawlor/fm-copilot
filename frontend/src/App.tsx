@@ -16,6 +16,7 @@ import { CreateWorkOrderPage } from './pages'
 import { AssetsPage } from './pages'
 import { PMPage } from './pages'
 import { ProfilePage } from './pages'
+import { LandingPage } from './pages'
 
 // Protected route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -56,13 +57,29 @@ function App() {
           } />
         </Route>
 
+        {/* Direct login/register routes for convenience */}
+        <Route path="/login" element={
+          <PublicRoute>
+            <AuthLayout>
+              <LoginPage />
+            </AuthLayout>
+          </PublicRoute>
+        } />
+        <Route path="/register" element={
+          <PublicRoute>
+            <AuthLayout>
+              <RegisterPage />
+            </AuthLayout>
+          </PublicRoute>
+        } />
+
         {/* Protected routes */}
         <Route path="/" element={
           <ProtectedRoute>
             <Layout />
           </ProtectedRoute>
         }>
-          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route index element={<LandingPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="work-orders" element={<WorkOrdersPage />} />
           <Route path="work-orders/new" element={<CreateWorkOrderPage />} />

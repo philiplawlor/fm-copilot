@@ -1,4 +1,5 @@
 // Re-export all page components for easier imports
+export { LandingPage } from './LandingPage'
 export { WorkOrderDetailPage } from './WorkOrderDetailPage'
 export { CreateWorkOrderPage } from './CreateWorkOrderPage'
 export { AssetsPage } from './AssetsPage'
