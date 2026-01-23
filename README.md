@@ -15,10 +15,15 @@ FM Copilot is a pragmatic AI assistant that sits on top of existing CMMS/BMS sys
 
 ## Architecture
 
+**Architectural Decisions:**
+- **Multi-Tenant SaaS**: Tenant isolation with organization-based data separation
+- **Containerized Deployment**: Docker Compose for local development, cloud platforms (AWS/GCP/Azure) for production
+- **Technology Stack**: Node.js backend (chosen over Python for full-stack consistency), MySQL database (chosen for relational data management and cost-effectiveness)
+
 ```
 fm-copilot/
-├── backend/          # Node.js/Python API services
-├── frontend/         # React web application  
+├── backend/          # Node.js/TypeScript API services
+├── frontend/         # React web application
 ├── database/         # MySQL schema and migrations
 ├── docs/            # Documentation and API specs
 ├── scripts/         # Deployment and utility scripts
@@ -31,13 +36,27 @@ fm-copilot/
 2. **Smart Tech & Vendor Dispatch** - Assignment recommendation engine
 3. **Preventive Maintenance Auto-Setup** - Template-based PM scheduling
 
+## Phase 1.1 Features (Multi-Tenant Foundation)
+
+1. **Organization Management** - Multi-tenant architecture with tenant isolation
+2. **User Administration** - Organization-level user management and role assignment
+3. **Billing Integration** - Subscription management and payment processing
+4. **Admin Interface** - Organization admin dashboard for user/billing management
+5. **Audit Logging** - Comprehensive logging system for compliance and security
+
 ## Tech Stack
+
+**Architectural Rationale:**
+- **Node.js Backend**: Chosen over Python for full-stack TypeScript consistency, better JavaScript ecosystem integration, and unified development team skills
+- **MySQL Database**: Selected over PostgreSQL for cost-effectiveness, widespread adoption, and sufficient relational capabilities for FM use cases
+- **Multi-Tenant Design**: Built-in tenant isolation ensures data security and scalability
 
 - **Frontend**: React 18, TypeScript, Tailwind CSS
 - **Backend**: Node.js, Express, TypeScript
 - **Database**: MySQL 8.0, Redis for caching
 - **AI**: OpenAI GPT-4 for NLP, custom classification models
 - **Deployment**: Docker Compose, Nginx reverse proxy
+- **Multi-Tenant**: Organization-based data isolation and user management
 
 ## Quick Start
 
@@ -188,6 +207,13 @@ fm-copilot/
 - **Custom Fields**: Configurable properties to match organizational needs
 - **Audit Trail**: Complete change tracking and compliance logging
 
+### 🏢 Multi-Tenant Administration
+- **Organization Management**: Tenant isolation and data security
+- **User Administration**: Role-based access control and user management
+- **Billing & Subscriptions**: Payment processing and subscription management
+- **Admin Dashboard**: Organization-level controls and analytics
+- **Compliance Logging**: Audit trails for regulatory requirements
+
 ## Technology Stack
 
 ### Frontend
@@ -204,14 +230,17 @@ fm-copilot/
 - **Database**: MySQL 8.0 with connection pooling
 - **Caching**: Redis for session storage and caching
 - **Authentication**: JWT with bcrypt password hashing
+- **Multi-Tenant**: Organization-based data isolation and user management
 - **AI Integration**: OpenAI GPT-4 for natural language processing
+- **Admin Interface**: Organization management and billing controls
 
 ### DevOps
 - **Containerization**: Docker multi-stage builds
-- **Orchestration**: Docker Compose for service coordination
+- **Orchestration**: Docker Compose for development, Docker for production deployment
 - **Reverse Proxy**: Nginx for production deployment
 - **Security**: Rate limiting, CORS, security headers
 - **Monitoring**: Health checks and structured logging
+- **Multi-Tenant**: Tenant-aware logging and monitoring
 
 ## API Documentation
 
@@ -268,14 +297,24 @@ NODE_ENV=production
 PORT=8000
 ```
 
+## Pricing Model
+
+**SaaS Tiers:**
+- **Starter**: $500/month - Up to 5 users, 1,000 work orders/month, core features
+- **Professional**: $1,500/month - Up to 25 users, 5,000 work orders/month, all Phase 1-2 features
+- **Enterprise**: Custom pricing - Unlimited users, volume discounts, dedicated support, custom integrations
+
+**Free Trial**: 14-day full-feature trial with demo data pre-loaded
+
 ## Security Features
 
 - **Authentication**: JWT-based secure authentication
-- **Authorization**: Role-based access control
+- **Authorization**: Role-based access control with multi-tenant isolation
 - **Rate Limiting**: API request throttling
 - **Input Validation**: Comprehensive request validation
 - **Security Headers**: XSS protection, content security policy
 - **Data Encryption**: Secure password storage and data transmission
+- **Tenant Isolation**: Organization-level data security and privacy
 
 ## Monitoring & Logging
 

@@ -252,8 +252,8 @@ Facility management teams are drowning in administrative work, manual scheduling
 - Progressive Web App (PWA) capabilities
 
 **Backend:**
-- Node.js/Python microservices architecture
-- PostgreSQL for structured data
+- Node.js or Python microservices architecture
+- MySQL for structured data
 - Vector database for semantic search (asset documentation, history)
 - Redis for caching and real-time updates
 
